@@ -15,8 +15,25 @@
 // - Document the "roundness" field, explaining that it is a percentage
 // - Document the "orangeness" field, explaining that it is a number from 8 to 27
 
+//! A pumpkin is a vernacular term for mature winter squash of species and varieties in the genus
+//! Cucurbita that has culinary and cultural significance but no agreed upon botanical or scientific
+//! meaning. The term pumpkin is sometimes used interchangeably with "squash" or "winter squash", and
+//! is commonly used for cultivars of Cucurbita argyrosperma, Cucurbita ficifolia, Cucurbita maxima,
+//! Cucurbita moschata, and Cucurbita pepo.
+//!
+//! ![A bunch of pumpkins](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/FrenchMarketPumpkinsB.jpg/700px-FrenchMarketPumpkinsB.jpg)
+
+/// Big orange thing
+///
+/// # Recipes
+///
+/// Recipes coming soon.
 pub struct Pumpkin {
+    /// Percentage of roundness
     pub roundness: f32,
+    /// Orangeness of the pumpkin
+    ///
+    /// A number from 8-27
     pub orangeness: i32,
 }
 
@@ -24,12 +41,16 @@ pub struct Pumpkin {
 // can't be used for pie. :'-(
 
 impl Pumpkin {
+    /// Smash the pumpkin
+    ///
+    /// If you smash the pumpkin, it will be gone. Then it can't be used for pie. :'-(
     pub fn smash(self) {}
 }
 
 // 5. Document that BURNT_ORANGE is for the "orangeness" field in the Pumpkin struct.
 // - Link to the Pumpkin struct in your description
 
+/// For the `orangeness` field in the [`Pumpkin`] struct
 pub const BURNT_ORANGE: i32 = 13;
 
 // Challenge: Find the option to pass to `cargo doc` so that documentation for this private item
