@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Cake {
     Chocolate,
     MapleBacon,
@@ -28,8 +28,8 @@ impl PartialEq for Party {
     }
 }
 
-impl From<Party> for Cake {
-    fn from(party: Party) -> Self {
+impl From<&Party> for Cake {
+    fn from(party: &Party) -> Self {
         party.cake
     }
 }
@@ -103,14 +103,17 @@ fn main() {
     // - Implement `From<Party> for Cake` so that the function call below works.
     //
 
-    smell_cake(party);
+    smell_cake(&party);
 
     // Challenge 2: Implement `From<&Party> for Cake` so that you can smell your cake without
     // consuming it. Change the code above to pass in a &party. Then uncomment and run the code
     // below. After all, you want to smell your cake and eat it, too!
 
-    // println!("Yum! I'm eating this cake: {:?}. Oops, I dropped it on the floor.", party.cake);
-    // drop(cake);
+    println!(
+        "Yum! I'm eating this cake: {:?}. Oops, I dropped it on the floor.",
+        party.cake
+    );
+    drop(cake);
 }
 
 pub fn admire_cake(cake: Cake) {
