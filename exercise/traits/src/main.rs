@@ -113,7 +113,7 @@ fn main() {
         "Yum! I'm eating this cake: {:?}. Oops, I dropped it on the floor.",
         party.cake
     );
-    drop(cake);
+    // drop(cake);
 }
 
 pub fn admire_cake(cake: Cake) {
