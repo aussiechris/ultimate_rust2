@@ -23,7 +23,7 @@ fn main() {
     // the code and see the output from the child thread's expensive sum in the middle of the main
     // thread's processing of letters.
     //
-    //let handle = ...
+    let handle = thread::spawn(|| expensive_sum(my_vector));
 
     // While the child thread is running, the main thread will also do some work
     for letter in ["a", "b", "c", "d", "e", "f"] {
@@ -37,9 +37,9 @@ fn main() {
     // to a variable named `result`
     // - Get the i32 out of `result` and store it in a `sum` variable.
 
-    // let result =
-    // let sum =
-    // println!("The child thread's expensive sum is {}", sum);
+    let result = handle.join();
+    let sum = result.unwrap_or(666);
+    println!("The child thread's expensive sum is {}", sum);
 
     // 3. Time for some fun with channels!
     // - Uncomment the block comment below (Find and remove the `/*` and `*/`).
