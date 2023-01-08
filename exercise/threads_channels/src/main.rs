@@ -1,7 +1,7 @@
 // Silence some warnings so they don't distract from the exercise.
 #![allow(dead_code, unused_imports, unused_variables)]
 use crossbeam::channel;
-use std::thread;
+use std::thread::{self, sleep};
 use std::time::Duration;
 
 fn sleep_ms(ms: u64) {
@@ -96,5 +96,34 @@ fn main() {
     // On the child threads print out the values you receive. Close the sending side in the main
     // thread by calling `drop(tx)` (assuming you named your sender channel variable `tx`). Join
     // the child threads.
+
+    let (tx, rx) = channel::unbounded();
+    let rx2 = rx.clone();
+
+    // Thread A
+    let handle_a = thread::spawn(move || {
+        for msg in rx {
+            println!("Thread A recieved: {}", msg)
+        }
+    });
+
+    // Thread B
+    let handle_b = thread::spawn(move || {
+        for msg in rx2 {
+            println!("Thread B recieved: {}", msg)
+        }
+    });
+
+    for n in 1..=20 {
+        println!("Main thread sending: {}", n);
+        tx.send(n).unwrap();
+        sleep_ms(20)
+    }
+
+    drop(tx);
+
+    let _ = handle_a.join();
+    let _ = handle_b.join();
+
     println!("Main thread: Exiting.")
 }
